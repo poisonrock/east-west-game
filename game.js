@@ -109,6 +109,8 @@ function playDemoThenReset() {
   document.body.classList.add('modal-open');
   demoVideo.currentTime = 0;
   videoCountdown.textContent = '3초';
+  videoCountdown.disabled = true;
+  videoCountdown.classList.remove('ready');
   demoVideo.play().catch(() => {});
   const startedAt = Date.now();
   clearInterval(videoTimer);
@@ -116,7 +118,14 @@ function playDemoThenReset() {
     const elapsed = Date.now() - startedAt;
     const remaining = Math.max(0, Math.ceil((3000 - elapsed) / 1000));
     videoCountdown.textContent = `${remaining}초`;
-    if (elapsed >= 3000) closeDemoAndReset();
+    if (elapsed >= 3000) {
+      clearInterval(videoTimer);
+      videoTimer = null;
+      demoVideo.pause();
+      videoCountdown.textContent = '종료';
+      videoCountdown.disabled = false;
+      videoCountdown.classList.add('ready');
+    }
   }, 100);
 }
 
@@ -133,3 +142,6 @@ numberButtons.forEach(button => button.addEventListener('click', () => selectCou
 directionButtons.forEach(button => button.addEventListener('click', () => reveal(button.dataset.dir)));
 startButton.addEventListener('click', startGame);
 againButton.addEventListener('click', playDemoThenReset);
+videoCountdown.addEventListener('click', () => {
+  if (!videoCountdown.disabled) closeDemoAndReset();
+});

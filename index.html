@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#f3f4ef">
+  <title>동서남북 포인트 게임</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="photo.css">
+</head>
+<body>
+  <main class="game">
+    <header>
+      <span class="mini">POINT GAME</span>
+      <h1>동서남북</h1>
+      <p>숫자를 고르고 포인트를 적립하세요</p>
+      <div class="point-total">보유 포인트 <strong id="totalPoints">0 P</strong></div>
+    </header>
+    <section class="board">
+      <div class="paper" id="paper" aria-label="초록색 동서남북 종이접기">
+        <img class="motion-frame" id="motionFrame" src="assets/images/motion-closed.png" alt="초록색 동서남북 종이접기 동작">
+        <button class="hotspot nw" data-dir="동" aria-label="동 선택" disabled></button>
+        <button class="hotspot ne" data-dir="남" aria-label="남 선택" disabled></button>
+        <button class="hotspot sw" data-dir="서" aria-label="서 선택" disabled></button>
+        <button class="hotspot se" data-dir="북" aria-label="북 선택" disabled></button>
+      </div>
+      <div class="step" id="step">준비!</div>
+    </section>
+    <section class="panel">
+      <p class="instruction" id="instruction">몇 번 움직일까요?</p>
+      <div class="numbers" id="numbers">
+        <button data-count="1">1</button><button data-count="2">2</button>
+        <button data-count="3">3</button><button data-count="4">4</button>
+        <button data-count="5">5</button><button data-count="6">6</button>
+      </div>
+      <button class="start" id="start" disabled>시작하기</button>
+      <button class="again" id="again" hidden>동영상 보고 다시 하기</button>
+    </section>
+    <footer>마지막 방향을 선택하면 랜덤 포인트가 적립돼요</footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>

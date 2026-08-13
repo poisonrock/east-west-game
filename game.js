@@ -9,6 +9,9 @@ const numberButtons = [...document.querySelectorAll('[data-count]')];
 const directionButtons = [...document.querySelectorAll('[data-dir]')];
 const startButton = document.querySelector('#start');
 const againButton = document.querySelector('#again');
+const videoModal = document.querySelector('#videoModal');
+const demoVideo = document.querySelector('#demoVideo');
+const videoCountdown = document.querySelector('#videoCountdown');
 const frames = ['motion-vertical.png', 'motion-horizontal.png', 'motion-vertical.png', 'motion-wide.png'];
 const pointOptions = [10, 30, 50, 100, 200, 300, 500];
 
@@ -100,7 +103,33 @@ function resetGame() {
   againButton.hidden = true;
 }
 
+let videoTimer = null;
+function playDemoThenReset() {
+  videoModal.hidden = false;
+  document.body.classList.add('modal-open');
+  demoVideo.currentTime = 0;
+  videoCountdown.textContent = '3초';
+  demoVideo.play().catch(() => {});
+  const startedAt = Date.now();
+  clearInterval(videoTimer);
+  videoTimer = setInterval(() => {
+    const elapsed = Date.now() - startedAt;
+    const remaining = Math.max(0, Math.ceil((3000 - elapsed) / 1000));
+    videoCountdown.textContent = `${remaining}초`;
+    if (elapsed >= 3000) closeDemoAndReset();
+  }, 100);
+}
+
+function closeDemoAndReset() {
+  clearInterval(videoTimer);
+  videoTimer = null;
+  demoVideo.pause();
+  videoModal.hidden = true;
+  document.body.classList.remove('modal-open');
+  resetGame();
+}
+
 numberButtons.forEach(button => button.addEventListener('click', () => selectCount(Number(button.dataset.count))));
 directionButtons.forEach(button => button.addEventListener('click', () => reveal(button.dataset.dir)));
 startButton.addEventListener('click', startGame);
-againButton.addEventListener('click', resetGame);
+againButton.addEventListener('click', playDemoThenReset);

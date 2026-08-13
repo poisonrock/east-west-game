@@ -7,9 +7,15 @@
   <title>동서남북 포인트 게임</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="photo.css">
+  <link rel="stylesheet" href="compact.css">
 </head>
 <body>
   <main class="game">
+    <div class="reward-celebration" id="rewardCelebration" aria-hidden="true">
+      <div class="reward-coin">P</div>
+      <b class="reward-amount" id="rewardAmount">+100 P</b>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
     <header>
       <span class="mini">POINT GAME</span>
       <h1>동서남북</h1>
@@ -36,10 +42,7 @@
       <button class="start" id="start" disabled>시작하기</button>
       <button class="again" id="again" hidden>동영상 보고 다시 하기</button>
     </section>
-    <footer>
-      <span>마지막 방향을 선택하면 랜덤 포인트가 적립돼요</span>
-       <small>Powered by S.J.HAN</small>
-    </footer>
+    <footer><span>마지막 방향을 선택하면 랜덤 포인트가 적립돼요</span><small>Powered by S.J.HAN</small></footer>
   </main>
   <script src="game.js"></script>
 </body>
